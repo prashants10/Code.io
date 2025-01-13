@@ -8,3 +8,12 @@ export const createProjectApi = async () => {
     console.log(err);
   }
 };
+
+export const projectTreeApi = async (projectId) => {
+  try {
+    const response = await axios.get(`/api/v1/projects/${projectId}/tree`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

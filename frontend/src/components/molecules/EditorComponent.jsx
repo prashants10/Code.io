@@ -9,7 +9,6 @@ const EditorComponent = () => {
   async function downloadTheme() {
     const response = await fetch("/Dracula.json");
     const data = await response.json();
-    console.log(data);
     setEditorState({ ...editorState, theme: data });
   }
 

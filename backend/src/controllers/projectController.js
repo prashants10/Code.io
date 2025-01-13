@@ -1,26 +1,31 @@
-import util from "util";
-import child_process from "child_process";
-import fs from "fs/promises";
-import uuid4 from "uuid4";
-
-const execPromisified = util.promisify(child_process.exec);
-
+import {
+  createProjectService,
+  projectTreeService,
+} from "../services/projectService.js";
 export async function createProjectController(req, res) {
   try {
-    // Create a unique id and inside the projects folder create a folder with that id
-    const projectId = uuid4();
-
-    await fs.mkdir(`./projects/${projectId}`);
-
-    const response = await execPromisified(
-      "npm create vite@latest sandbox -- --template react",
-      {
-        cwd: `./projects/${projectId}`,
-      }
-    );
+    const data = await createProjectService();
     return res.status(201).json({
       message: "Project created successfully",
-      data: projectId,
+      data: data,
     });
-  } catch (err) {}
+  } catch (err) {
+    return res.status(502).json({
+      message: "Something went wrong",
+    });
+  }
+}
+
+export async function projectTreeController(req, res) {
+  try {
+    const tree = await projectTreeService(req.params.projectId);
+    return res.status(200).json({
+      data: tree,
+      message: "Successfully fetched the tree",
+    });
+  } catch (err) {
+    return res.status(502).json({
+      message: "Something went wrong",
+    });
+  }
 }

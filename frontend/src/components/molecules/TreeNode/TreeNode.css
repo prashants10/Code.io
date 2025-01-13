@@ -1,0 +1,35 @@
+.file-folder {
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 2px;
+  width: 100%;
+  display: flex;
+  font-size: 1rem;
+  margin-bottom: 3px;
+  justify-content: flex-start;
+}
+
+.file-folder:hover {
+  background: #757d8a;
+}
+
+.sub-folder {
+  padding-left: 30px;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 5px;
+}
+
+.folder {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+}
